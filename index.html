@@ -1,47 +1,103 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jQuery</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="main.css">
+  <title>Formulário com jQuery e Máscaras</title>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Galeria de fotos</h1>
-        <button type="button">Nova imagem +</button>
-    </header>
-    <form>
-        <h2>Inserir nova imagem</h2>
-        <input type="url" id="endereco-imagem-nova" required placeholder="URL da imagem">
-        <button type="submit">Adicionar</button>
-        <button type="reset" id="botao-cancelar">Cancelar</button>
-    </form>
-    <ul>
-        <li>
-            <img src="./images/foto1.jpg" alt="pintura de um gato">
-            <div class="overlay-imagem-link">
-                <a href="./images/foto1.jpg" title="Ver imagem em tamanho real" target="_blank">Ver imagem em tamanho real</a>
-            </div>
-        </li>
-        <li>
-            <img src="./images/foto2.jpg" alt="pintura de um gato">
-            <div class="overlay-imagem-link">
-                <a href="./images/foto2.jpg" title="Ver imagem em tamanho real" target="_blank">Ver imagem em tamanho real</a>
-            </div>
-        </li>
-        <li>
-            <img src="./images/foto3.jpg" alt="pintura de um gato">
-            <div class="overlay-imagem-link">
-                <a href="./images/foto3.jpg" title="Ver imagem em tamanho real" target="_blank">Ver imagem em tamanho real</a>
-            </div>
-        </li>
-    </ul>
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-    <script src="./main.js"></script>
+  <h1>Formulário</h1>
+
+  <form id="myForm" method="POST" action="#">
+    <div>
+      <label for="nome">Nome Completo:</label>
+      <input type="text" id="nome" name="nome">
+      <span id="nomeError" class="error"></span>
+    </div>
+
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email">
+      <span id="emailError" class="error"></span>
+    </div>
+
+    <div>
+      <label for="telefone">Telefone:</label>
+      <input type="tel" id="telefone" name="telefone">
+      <span id="telefoneError" class="error"></span>
+    </div>
+
+    <div>
+      <label for="cpf">CPF:</label>
+      <input type="text" id="cpf" name="cpf">
+      <span id="cpfError" class="error"></span>
+    </div>
+
+    <div>
+      <label for="endereco">Endereço Completo:</label>
+      <input type="text" id="endereco" name="endereco">
+      <span id="enderecoError" class="error"></span>
+    </div>
+
+    <div>
+      <label for="cep">CEP:</label>
+      <input type="text" id="cep" name="cep">
+      <span id="cepError" class="error"></span>
+    </div>
+
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script>
+    $(document).ready(function() {
+      $('#cpf').mask('000.000.000-00');
+      $('#cep').mask('00000-000');
+
+      $('#myForm').submit(function(event) {
+        $('.error').text('');
+        var nome = $('#nome').val();
+        if (nome.trim() === '') {
+          $('#nomeError').text('Por favor, preencha o nome completo');
+          event.preventDefault();
+        }
+
+        var email = $('#email').val();
+        if (email.trim() === '') {
+          $('#emailError').text('Por favor, preencha o email');
+          event.preventDefault();
+        }
+
+        var telefone = $('#telefone').val();
+        if (telefone.trim() === '') {
+          $('#telefoneError').text('Por favor, preencha o telefone');
+          event.preventDefault();
+        }
+
+        var cpf = $('#cpf').val();
+        if (cpf.trim() === '') {
+          $('#cpfError').text('Por favor, preencha o CPF');
+          event.preventDefault();
+        }
+
+        var endereco = $('#endereco').val();
+        if (endereco.trim() === '') {
+          $('#enderecoError').text('Por favor, preencha o endereço');
+          event.preventDefault();
+        }
+
+        var cep = $('#cep').val();
+        if (cep.trim()
+        === '') {
+$('#cepError').text('Por favor, preencha o CEP');
+event.preventDefault();
+}
+});
+});
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 </body>
 </html>
